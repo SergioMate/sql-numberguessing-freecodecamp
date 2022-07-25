@@ -10,6 +10,7 @@ PLAYER=$($PSQL "SELECT username, games_played, best_game FROM players WHERE user
 if [ -z "$PLAYER" ]
 then
   echo "Welcome, $USERNAME! It looks like this is your first time here"
+  $PSQL "INSERT INTO players(username) VALUES('$USERNAME')" > /dev/null
 else
   echo $PLAYER | {
     IFS=" | "
